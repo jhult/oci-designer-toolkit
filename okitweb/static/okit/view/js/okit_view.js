@@ -72,6 +72,9 @@ class OkitJsonView {
         this.subnets = [];
         this.virtual_cloud_networks = [];
         this.virtual_network_interfaces = [];
+        this.exadata_infrastructures = [];
+        this.vm_clusters = [];
+        this.vm_cluster_networks = [];
     }
 
     load() {
@@ -82,6 +85,7 @@ class OkitJsonView {
         for (let artefact of this.okitjson.customer_premise_equipments) {this.newCustomerPremiseEquipment(artefact);}
         for (let artefact of this.okitjson.database_systems) {this.newDatabaseSystem(artefact);}
         for (let artefact of this.okitjson.dynamic_routing_gateways) {this.newDynamicRoutingGateway(artefact);}
+        for (let artefact of this.okitjson.getExadataInfrastructures()) {this.newExadataInfrastructure(artefact);}
         for (let artefact of this.okitjson.fast_connects) {this.newFastConnect(artefact);}
         for (let artefact of this.okitjson.file_storage_systems) {this.newFileStorageSystem(artefact);}
         for (let artefact of this.okitjson.instances) {this.newInstance(artefact);}
@@ -101,6 +105,8 @@ class OkitJsonView {
         for (let artefact of this.okitjson.service_gateways) {this.newServiceGateway(artefact);}
         for (let artefact of this.okitjson.subnets) {this.newSubnet(artefact);}
         for (let artefact of this.okitjson.virtual_cloud_networks) {this.newVirtualCloudNetwork(artefact);}
+        for (let artefact of this.okitjson.getVmClusters()) {this.newVmCluster(artefact);}
+        for (let artefact of this.okitjson.getVmClusterNetworks()) {this.newVmClusterNetwork(artefact);}
     }
 
     update(model) {
@@ -1277,6 +1283,9 @@ class OkitArtefactView {
         return OkitArtefactView.cut_copy_paste.resource ? OkitArtefactView.cut_copy_paste.resource.getDropTargets().includes(this.getArtifactReference()) : false;
     }
 
+    getFunction(resource_name) {return `get${resource_name.split(' ').join('')}`}
+    getArrayFunction(resource_name) {return `get${resource_name.split(' ').join('')}s`}
+
     getArtefact() {return this.artefact;}
 
     static new(artefact, json_view) {return new this(artefact, json_view);}
@@ -1959,7 +1968,8 @@ class OkitArtefactView {
     getContainerChildrenMaxDimensions() {
         let max_dimensions = {height: 0, width: 0};
         for (let group of this.getContainerArtifacts()) {
-            for(let artefact of this.json_view[this.artefact.artefactToElement(group)]) {
+            // for(let artefact of this.json_view[this.artefact.artefactToElement(group)]) {
+            for(let artefact of this.json_view[this.getArrayFunction(group)]()) {
                 if (artefact.parent_id === this.id && (!artefact.attached || !okitSettings.hide_attached)) {
                     let dimension = artefact.dimensions;
                     max_dimensions.height += Math.round(dimension.height + positional_adjustments.spacing.y);

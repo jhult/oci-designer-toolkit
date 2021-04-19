@@ -88,6 +88,12 @@ class OkitJson {
                 let obj = this.newObjectStorageBucket(artefact);
             }
         }
+        // Exadata Infrastructures
+        if (okit_json.hasOwnProperty('exadata_infrastructures')) {
+            for (let artefact of okit_json['exadata_infrastructures']) {
+                let obj = this.newExadataInfrastructure(artefact);
+            }
+        }
         // Virtual Cloud Networks
         // Turn Off Default Security List / Route Table Processing
         let okitSettingsClone = JSON.clone(okitSettings);
@@ -226,6 +232,21 @@ class OkitJson {
                 let obj = this.newLoadBalancer(artefact);
             }
         }
+
+        // Exadata Infrastructure Sub Components
+        // VM Clusters
+        if (okit_json.hasOwnProperty('vm_clusters')) {
+            for (let artefact of okit_json['vm_clusters']) {
+                let obj = this.newVmCluster(artefact);
+            }
+        }
+        // VM Cluster Networks
+        if (okit_json.hasOwnProperty('vm_cluster_networks')) {
+            for (let artefact of okit_json['vm_cluster_networks']) {
+                let obj = this.newVmClusterNetwork(artefact);
+            }
+        }
+        
         console.log();
     }
 
