@@ -37,12 +37,12 @@ class OCIVmClusters(OCIDatabaseConnection):
         if filter is None:
             filter = {}
 
-        if 'lifecycle_state' not in filter:
-           filter['lifecycle_state'] = ["PROVISIONING", "AVAILABLE", "UPDATING", "FAILED", "MAINTENANCE_IN_PROGRESS"]
+        # if 'lifecycle_state' not in filter:
+        #    filter['lifecycle_state'] = ["PROVISIONING", "AVAILABLE", "UPDATING", "FAILED", "MAINTENANCE_IN_PROGRESS"]
 
         # vm_clusters = oci.pagination.list_call_get_all_results(self.client.list_vm_clusters, compartment_id=compartment_id, exadata_infrastructure_id=self.exadata_infrastructure_id).data
         vm_clusters = oci.pagination.list_call_get_all_results(self.client.list_vm_clusters, compartment_id=compartment_id).data
-        logger.info(f'>>>> VM Clusters: {vm_clusters}')
+        logger.debug(f'>>>> VM Clusters: {vm_clusters}')
 
         # Convert to Json object
         vm_clusters_json = self.toJson(vm_clusters)

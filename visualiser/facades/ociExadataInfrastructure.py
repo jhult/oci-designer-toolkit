@@ -39,8 +39,8 @@ class OCIExadataInfrastructures(OCIDatabaseConnection):
         if filter is None:
             filter = {}
 
-        if 'lifecycle_state' not in filter:
-            filter['lifecycle_state'] = ["CREATING", "REQUIRES_ACTIVATION", "ACTIVATING", "ACTIVE", "UPDATING", "DISCONNECTED", "MAINTENANCE_IN_PROGRESS"]
+        # if 'lifecycle_state' not in filter:
+        #     filter['lifecycle_state'] = ["CREATING", "REQUIRES_ACTIVATION", "ACTIVATING", "ACTIVE", "UPDATING", "DISCONNECTED", "MAINTENANCE_IN_PROGRESS"]
 
         exadata_infrastructures = oci.pagination.list_call_get_all_results(self.client.list_exadata_infrastructures, compartment_id=compartment_id).data
         logger.debug('============================== ExadataInfrastructures Raw ==============================')
@@ -54,8 +54,8 @@ class OCIExadataInfrastructures(OCIDatabaseConnection):
 
         # Filter results
         self.exadata_infrastructures_json = self.filterJsonObjectList(exadata_infrastructures_json, filter)
-        logger.info('============================== ExadataInfrastructures ==============================')
-        logger.info(str(self.exadata_infrastructures_json))
+        logger.debug('============================== ExadataInfrastructures ==============================')
+        logger.debug(str(self.exadata_infrastructures_json))
 
         return self.exadata_infrastructures_json
 

@@ -47,7 +47,6 @@ class OkitDesignerJsonView extends OkitJsonView {
         }
         // Exadata Infrastructures
         for (let exadata_infrastructure of this.getExadataInfrastructures()) {
-            console.warn('Drawing Exadata Infrastructure', exadata_infrastructure.display_name)
             exadata_infrastructure.draw();
         }
         // Block Storage Volumes
@@ -155,6 +154,17 @@ class OkitDesignerJsonView extends OkitJsonView {
         // VM Cluster Network
         for (let vm_cluster_network of this.getVmClusterNetworks()) {
             vm_cluster_network.draw();
+        }
+
+        // VM Cluster Subcomponents
+        for (let db_node of this.getDbNodes()) {
+            db_node.draw();
+        }
+        for (let db_home of this.getDbHomes()) {
+            db_home.draw();
+        }
+        for (let database of this.getDatabases()) {
+            database.draw();
         }
 
         // Resize Main Canvas if required
