@@ -1,6 +1,17 @@
 # Release Notes
 
 
+## Version 0.22.0
+**Release Date**: 26th May 2021
+### Features
+1. Add DHCP Options Resource.
+2. Update OCI Instance installation to include additional IDCS Steps
+
+### Bug Fixes
+1. Resolve issue where region was not being passed to Instance Principal queries.
+2. GitHub Issue #315: Query for sub-compartments adds "/" to name 
+
+
 ## Version 0.21.0
 **Release Date**: 5th May 2021
 ### Features
