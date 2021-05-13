@@ -802,8 +802,17 @@ class OkitJsonView {
     // Route Table
     dropRouteTableView(target) {
         let view_artefact = this.newRouteTable();
-        view_artefact.getArtefact().vcn_id = target.id;
-        view_artefact.getArtefact().compartment_id = target.compartment_id;
+        if (target.type === VirtualCloudNetwork.getArtifactReference()) {
+            view_artefact.getArtefact().vcn_id = target.id;
+            view_artefact.getArtefact().compartment_id = target.compartment_id;
+        } else if (target.type === Subnet.getArtifactReference()) {
+            const subnet = this.getOkitJson().getSubnet(target.id)
+            view_artefact.getArtefact().vcn_id = subnet.vcn_id;
+            view_artefact.getArtefact().compartment_id = target.id;
+            subnet.route_table_id = view_artefact.id;
+        } else if (target.type === Compartment.getArtifactReference()) {
+            view_artefact.getArtefact().compartment_id = target.id;
+        }
         view_artefact.recalculate_dimensions = true;
         return view_artefact;
     }
@@ -831,8 +840,17 @@ class OkitJsonView {
     // Security List
     dropSecurityListView(target) {
         let view_artefact = this.newSecurityList();
-        view_artefact.getArtefact().vcn_id = target.id;
-        view_artefact.getArtefact().compartment_id = target.compartment_id;
+        if (target.type === VirtualCloudNetwork.getArtifactReference()) {
+            view_artefact.getArtefact().vcn_id = target.id;
+            view_artefact.getArtefact().compartment_id = target.compartment_id;
+        } else if (target.type === Subnet.getArtifactReference()) {
+            const subnet = this.getOkitJson().getSubnet(target.id)
+            view_artefact.getArtefact().vcn_id = subnet.vcn_id;
+            view_artefact.getArtefact().compartment_id = target.id;
+            subnet.security_list_ids.push(view_artefact.id);
+        } else if (target.type === Compartment.getArtifactReference()) {
+            view_artefact.getArtefact().compartment_id = target.id;
+        }
         view_artefact.recalculate_dimensions = true;
         return view_artefact;
     }
