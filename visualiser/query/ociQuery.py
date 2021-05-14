@@ -73,8 +73,8 @@ class OCIQuery(OCIConnection):
         "ServiceGateway",
         "Subnet",
         "Vcn",
-        "VMCluster",
-        "VMClusterNetwork",
+        "VmCluster",
+        "VmClusterNetwork",
         "Volume",
         "VolumeAttachment",
         "VnicAttachment",
@@ -109,8 +109,8 @@ class OCIQuery(OCIConnection):
         "ServiceGateway": "service_gateways",
         "Subnet": "subnets",
         "Vcn": "virtual_cloud_networks",
-        "VMCluster": "vm_clusters",
-        "VMClusterNetwork": "vm_cluster_networks",
+        "VmCluster": "vm_clusters",
+        "VmClusterNetwork": "vm_cluster_networks",
         "Volume": "block_storage_volumes"
     }
     VALID_LIFECYCLE_STATES = [
@@ -123,7 +123,8 @@ class OCIQuery(OCIConnection):
         "PROVISIONING",
         "UPDATING",
         "CREATING",
-        "INACTIVE"
+        "INACTIVE",
+        "ALLOCATED"
     ]
 
     def __init__(self, config=None, configfile=None, profile=None):
@@ -178,6 +179,7 @@ class OCIQuery(OCIConnection):
             logger.info("Processing Region : {0!s:s} {1!s:s}".format(region, resources.keys()))
             for resource_type, resource_list in resources.items():
                 logger.info("Processing Resource : {0!s:s}".format(resource_type))
+                # logger.info(jsonToFormattedString(resource_list))
                 if resource_type in map_keys:
                     if resource_type == "Drg":
                         resource_list = self.dynamic_routing_gateways(resource_list, resources)
