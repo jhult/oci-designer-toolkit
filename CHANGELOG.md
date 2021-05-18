@@ -12,6 +12,7 @@
 ### Bug Fixes
 1. Resolve issue where region was not being passed to Instance Principal queries.
 2. GitHub Issue #315: Query for sub-compartments adds "/" to name 
+3. Resolve issue where fast discovery was not returning DbHome & DbNode for ExaCC.
 
 
 ## Version 0.21.0
