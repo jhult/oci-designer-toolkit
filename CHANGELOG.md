@@ -8,6 +8,7 @@
 2. Update OCI Instance installation to include additional IDCS Steps
 3. Add Relationship View to show a force layout of connections between OCI resources.
 4. Move Resource Documentation to Notes tab on the property sheet rather than inline property allowing larger editor.
+5. Switch VCN to use multiple CIDR Blocks rather than just the single CIDR Block.
 
 ### Bug Fixes
 1. Resolve issue where region was not being passed to Instance Principal queries.
