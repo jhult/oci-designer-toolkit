@@ -1388,7 +1388,7 @@ class OkitArtefactView {
             this.drawText(svg, this.svg_label_text);
             this.drawTitle(svg);
             this.drawIcon(svg);
-            if (this.read_only) this.drawIconOverlay(svg)
+            // if (this.read_only) this.drawIconOverlay(svg)
             // Add standard / common click event
             this.addClickEvent(svg);
             // Add standard / common mouse over event
@@ -1441,6 +1441,18 @@ class OkitArtefactView {
             .attr("stroke-opacity",   definition.stroke_opacity)
             .attr("stroke-dasharray", definition.stroke_dasharray);
         return rect;
+    }
+
+    drawIcon1(svg) {
+        const icon = svg.append('svg')
+            .attr("width",     icon_width)
+            .attr("height",    icon_height)
+            .append('g')
+                .attr("style", "pointer-events: bounding-box;")
+                .append("use")
+                .attr("xlink:href",`#${this.icon_definition_id}`)
+                .attr("transform", this.icon_transform);
+        return icon;
     }
 
     drawIcon(svg) {
