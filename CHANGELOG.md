@@ -1,17 +1,5 @@
 # Release Notes
 
-
-## Version 0.22.0
-**Release Date**: 26th May 2021
-### Features
-1. Add DHCP Options Resource.
-2. Update OCI Instance installation to include additional IDCS Steps
-3. Add Relationship View to show a force layout of connections between OCI resources.
-4. Move Resource Documentation to Notes tab on the property sheet rather than inline property allowing larger editor.
-5. Switch VCN to use multiple CIDR Blocks rather than just the single CIDR Block.
-6. Allow users to specify which Route Table / Security List / Dhcp Option is the default for a VCN.
-7. Update Icons to latest versions.
-
 ### Bug Fixes
 1. Resolve issue where region was not being passed to Instance Principal queries.
 2. GitHub Issue #315: Query for sub-compartments adds "/" to name 
