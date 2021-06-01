@@ -57,7 +57,7 @@ class OCIGenerator(object):
         # -- Add Standard Author / Copyright variables
         self.jinja2_variables["author"] = __author__
         self.jinja2_variables["copyright"] = __copyright__
-        self.jinja2_variables["okit_version"] = "0.21.0"
+        self.jinja2_variables["okit_version"] = "0.22.1"
 
     def get(self, artifact_type, id):
         artifact = {};
@@ -1765,7 +1765,8 @@ class OCIGenerator(object):
             # ----- Enabled
             self.addJinja2Variable("is_ipv6enabled", virtual_cloud_network["is_ipv6enabled"], standardisedName)
             # ----- Block
-            self.addJinja2Variable("ipv6cidr_block", virtual_cloud_network["ipv6cidr_block"], standardisedName)
+            # self.addJinja2Variable("ipv6cidr_block", virtual_cloud_network["ipv6cidr_block"], standardisedName)
+            self.jinja2_variables["ipv6cidr_blocks"] = virtual_cloud_network.get("ipv6cidr_blocks", [virtual_cloud_network.get("ipv6cidr_block", '')])
         else:
             self.jinja2_variables.pop("is_ipv6enabled", None)
             self.jinja2_variables.pop("ipv6cidr_block", None)
