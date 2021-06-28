@@ -450,7 +450,7 @@ class OkitResource {
         }
     }
     // --- Positional
-    get width_multiplier() {return this.show_label ? this.settings.show_label === 'name' ? 1.5 : 2 : 1}
+    get width_multiplier() {return this.show_label ? this.settings.show_label === 'name' ? 5 : 3 : 2}
     get height_multiplier() {return this.show_label ?  1.5 : 1}
     // ---- Padding
     get padding_dx() {return 0}

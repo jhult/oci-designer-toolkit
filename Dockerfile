@@ -56,7 +56,7 @@ RUN yum install -y \
         xlsxwriter==1.3.7 \
 # Create Workspace
  && mkdir -p /github \
- && git clone -c core.autocrlf=input https://github.com/oracle/oci-designer-toolkit.git /github/oci-designer-toolkit \
+    && git clone -b padding --single-branch -c core.autocrlf=input https://github.com/jhult/oci-designer-toolkit.git /github/oci-designer-toolkit \
  && mkdir -p /okit/{log,workspace,ssl} \
  && mkdir -p /root/bin \
  && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /okit/ssl/okit.key -out /okit/ssl/okit.crt -subj "/C=GB/ST=Berkshire/L=Reading/O=Oracle/OU=OKIT/CN=www.oci_okit.com" \
